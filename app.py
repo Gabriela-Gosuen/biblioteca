@@ -1,11 +1,14 @@
 
 
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash,session
 import sqlite3
+import os
 from waitress import serve
 
 app = Flask(__name__)
 app.secret_key = 'sua_chave_secreta'
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DB_PATH = os.path.join(BASE_DIR,"biblioteca.db")
 
 def get_db_connection():
     conn = sqlite3.connect('biblioteca.db')
@@ -144,5 +147,5 @@ def dashboard():
     return render_template('dashboard.html')
 
 if __name__ == '__main__':
-     init_db()
-     app.run(debug=True)
+     port = int(os.environ.get("PORT",5000))
+     app.run(host="0.0.0.0", port=port)
