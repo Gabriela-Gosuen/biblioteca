@@ -3,7 +3,7 @@
 from flask import Flask, render_template, request, redirect, url_for, flash,session
 import sqlite3
 import os
-from waitress import serve
+
 
 app = Flask(__name__)
 app.secret_key = 'sua_chave_secreta'
@@ -149,3 +149,4 @@ def dashboard():
 if __name__ == '__main__':
      port = int(os.environ.get("PORT",5000))
      app.run(host="0.0.0.0", port=port)
+
